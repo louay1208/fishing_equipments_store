@@ -1,6 +1,3 @@
-# Database (auto-generated)
-database/*.db
-
 # OS files
 .DS_Store
 Thumbs.db
