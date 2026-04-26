@@ -96,13 +96,13 @@ if (isLoggedIn()) {
                         </ul>
                     </li>
                 <?php else: ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">
+                    <li class="nav-item d-flex align-items-center">
+                        <a class="btn btn-outline-secondary btn-sm" href="/login">
                             <i class="bi bi-box-arrow-in-right me-1"></i>Connexion
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="btn btn-primary btn-sm ms-2 mt-1" href="/register">S'inscrire</a>
+                    <li class="nav-item d-flex align-items-center ms-2">
+                        <a class="btn btn-primary btn-sm" href="/register">S'inscrire</a>
                     </li>
                 <?php endif; ?>
             </ul>

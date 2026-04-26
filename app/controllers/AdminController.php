@@ -15,6 +15,15 @@ class AdminController {
 
         $recentOrders = $db->query("SELECT c.*, u.nom, u.prenom FROM commande c JOIN utilisateur u ON u.id = c.utilisateur_id ORDER BY c.date_commande DESC LIMIT 5")->fetchAll();
 
+        // Low stock products (≤ 5)
+        $lowStock = $db->query("SELECT p.id, p.nom, p.quantite_stock, c.nom as categorie_nom FROM produit p LEFT JOIN categorie c ON c.id = p.categorie_id WHERE p.quantite_stock <= 5 ORDER BY p.quantite_stock ASC LIMIT 6")->fetchAll();
+
+        // Order breakdown by status
+        $ordersByStatus = $db->query("SELECT statut, COUNT(*) as cnt FROM commande GROUP BY statut")->fetchAll(PDO::FETCH_KEY_PAIR);
+
+        // Recent contact messages
+        $recentContacts = $db->query("SELECT * FROM contact ORDER BY created_at DESC LIMIT 3")->fetchAll();
+
         $pageTitle = 'Admin — Pêche Marine TN';
         require VIEW_PATH . '/layouts/header.php';
         require VIEW_PATH . '/admin/dashboard.php';
@@ -36,13 +45,27 @@ class AdminController {
     public static function storeProduct(): void {
         requireAdmin();
         $db = Database::get();
-        $stmt = $db->prepare("INSERT INTO produit (nom, description, prix, quantite_stock, categorie_id) VALUES (?,?,?,?,?)");
+
+        // Handle image upload
+        $imageName = null;
+        if (!empty($_FILES['image']['name']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+            $allowed = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+            if (in_array($ext, $allowed)) {
+                $imageName = uniqid('prod_') . '.' . $ext;
+                $dest = BASE_PATH . '/public/assets/images/products/' . $imageName;
+                move_uploaded_file($_FILES['image']['tmp_name'], $dest);
+            }
+        }
+
+        $stmt = $db->prepare("INSERT INTO produit (nom, description, prix, quantite_stock, categorie_id, image) VALUES (?,?,?,?,?,?)");
         $stmt->execute([
             trim($_POST['nom'] ?? ''),
             trim($_POST['description'] ?? ''),
             (float)($_POST['prix'] ?? 0),
             (int)($_POST['quantite_stock'] ?? 0),
             (int)($_POST['categorie_id'] ?? null) ?: null,
+            $imageName,
         ]);
         flash('success', 'Produit ajouté avec succès.');
         redirect('/admin/products');
@@ -51,15 +74,43 @@ class AdminController {
     public static function updateProduct(): void {
         requireAdmin();
         $db = Database::get();
-        $stmt = $db->prepare("UPDATE produit SET nom=?, description=?, prix=?, quantite_stock=?, categorie_id=? WHERE id=?");
-        $stmt->execute([
-            trim($_POST['nom'] ?? ''),
-            trim($_POST['description'] ?? ''),
-            (float)($_POST['prix'] ?? 0),
-            (int)($_POST['quantite_stock'] ?? 0),
-            (int)($_POST['categorie_id'] ?? null) ?: null,
-            (int)($_POST['id'] ?? 0),
-        ]);
+        $id = (int)($_POST['id'] ?? 0);
+
+        // Handle image upload
+        $imageName = null;
+        if (!empty($_FILES['image']['name']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+            $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+            $allowed = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+            if (in_array($ext, $allowed)) {
+                $imageName = uniqid('prod_') . '.' . $ext;
+                $dest = BASE_PATH . '/public/assets/images/products/' . $imageName;
+                move_uploaded_file($_FILES['image']['tmp_name'], $dest);
+            }
+        }
+
+        if ($imageName) {
+            $stmt = $db->prepare("UPDATE produit SET nom=?, description=?, prix=?, quantite_stock=?, categorie_id=?, image=? WHERE id=?");
+            $stmt->execute([
+                trim($_POST['nom'] ?? ''),
+                trim($_POST['description'] ?? ''),
+                (float)($_POST['prix'] ?? 0),
+                (int)($_POST['quantite_stock'] ?? 0),
+                (int)($_POST['categorie_id'] ?? null) ?: null,
+                $imageName,
+                $id,
+            ]);
+        } else {
+            $stmt = $db->prepare("UPDATE produit SET nom=?, description=?, prix=?, quantite_stock=?, categorie_id=? WHERE id=?");
+            $stmt->execute([
+                trim($_POST['nom'] ?? ''),
+                trim($_POST['description'] ?? ''),
+                (float)($_POST['prix'] ?? 0),
+                (int)($_POST['quantite_stock'] ?? 0),
+                (int)($_POST['categorie_id'] ?? null) ?: null,
+                $id,
+            ]);
+        }
+
         flash('success', 'Produit mis à jour.');
         redirect('/admin/products');
     }

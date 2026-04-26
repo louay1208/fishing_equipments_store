@@ -13,7 +13,12 @@
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
+                    <button class="btn btn-outline-secondary toggle-password" type="button" data-target="password" tabindex="-1">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary w-100 mb-3">
                 <i class="bi bi-box-arrow-in-right me-1"></i>Se Connecter

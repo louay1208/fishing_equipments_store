@@ -48,7 +48,7 @@
                         <div class="modal fade" id="editProduct<?= $p['id'] ?>" tabindex="-1">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <form method="POST" action="/admin/products/update">
+                                    <form method="POST" action="/admin/products/update" enctype="multipart/form-data">
                                         <input type="hidden" name="id" value="<?= $p['id'] ?>">
                                         <div class="modal-header">
                                             <h5 class="modal-title">Modifier le Produit</h5>
@@ -82,6 +82,17 @@
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Image</label>
+                                                <?php if (!empty($p['image'])): ?>
+                                                    <div class="mb-2">
+                                                        <img src="/assets/images/products/<?= e($p['image']) ?>" style="height:60px;border-radius:6px;" alt="">
+                                                        <span class="text-muted" style="font-size:0.78rem;">Image actuelle</span>
+                                                    </div>
+                                                <?php endif; ?>
+                                                <input type="file" class="form-control" name="image" accept="image/*">
+                                                <div class="form-text">Laisser vide pour garder l'image actuelle</div>
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annuler</button>
@@ -102,7 +113,7 @@
 <div class="modal fade" id="addProductModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="POST" action="/admin/products/store">
+            <form method="POST" action="/admin/products/store" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h5 class="modal-title">Ajouter un Produit</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -134,6 +145,11 @@
                                 <option value="<?= $c['id'] ?>"><?= e($c['nom']) ?></option>
                             <?php endforeach; ?>
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Image du Produit</label>
+                        <input type="file" class="form-control" name="image" accept="image/*">
+                        <div class="form-text">JPG, PNG, WebP ou GIF</div>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -32,11 +32,21 @@
             <div class="row g-3 mb-3">
                 <div class="col-6">
                     <label for="password" class="form-label">Mot de passe *</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Min. 6 caractères" required>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Min. 6 caractères" required>
+                        <button class="btn btn-outline-secondary toggle-password" type="button" data-target="password" tabindex="-1">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="col-6">
                     <label for="password_confirm" class="form-label">Confirmer *</label>
-                    <input type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="••••••••" required>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="••••••••" required>
+                        <button class="btn btn-outline-secondary toggle-password" type="button" data-target="password_confirm" tabindex="-1">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary w-100 mb-3">
