@@ -23,13 +23,13 @@
             <div class="card p-3 mb-3">
                 <h6 class="fw-bold mb-3"><i class="bi bi-tag me-1"></i>Catégories</h6>
                 <a href="/products" class="d-block mb-1 text-decoration-none <?= !$categoryId ? 'fw-bold' : '' ?>" 
-                   style="color: <?= !$categoryId ? 'var(--amber-400)' : 'var(--text-secondary)' ?>">
+                   style="color: <?= !$categoryId ? 'var(--accent)' : 'var(--text-secondary)' ?>">
                     Toutes les catégories
                 </a>
                 <?php foreach ($categories as $cat): ?>
                     <a href="/products?category=<?= $cat['id'] ?>" 
                        class="d-block mb-1 text-decoration-none <?= $categoryId == $cat['id'] ? 'fw-bold' : '' ?>"
-                       style="color: <?= $categoryId == $cat['id'] ? 'var(--amber-400)' : 'var(--text-secondary)' ?>">
+                       style="color: <?= $categoryId == $cat['id'] ? 'var(--accent)' : 'var(--text-secondary)' ?>">
                         <?= e($cat['nom']) ?>
                     </a>
                 <?php endforeach; ?>

@@ -7,7 +7,7 @@ $catIcons = ['🎣', '⚙️', '🐟', '🧵', '🪝', '🎒'];
     <div class="container position-relative">
         <div class="row align-items-center">
             <div class="col-lg-7">
-                <p class="text-uppercase fw-semibold mb-2" style="font-size:0.8rem; letter-spacing:0.1em; color: var(--amber-400);">
+                <p class="text-uppercase fw-semibold mb-2" style="font-size:0.8rem; letter-spacing:0.1em; color: var(--accent);">
                     🎣 La référence pêche en Tunisie
                 </p>
                 <h1>Équipez-vous<br>comme un <span class="highlight">pro</span></h1>
@@ -21,9 +21,9 @@ $catIcons = ['🎣', '⚙️', '🐟', '🧵', '🪝', '🎒'];
                     <?php endif; ?>
                 </div>
                 <div class="d-flex gap-4 mt-4 pt-2">
-                    <div><span class="fw-bold" style="color:var(--amber-400);">17+</span> <span class="text-muted" style="font-size:0.85rem;">Produits</span></div>
-                    <div><span class="fw-bold" style="color:var(--amber-400);">6</span> <span class="text-muted" style="font-size:0.85rem;">Catégories</span></div>
-                    <div><span class="fw-bold" style="color:var(--amber-400);">24/7</span> <span class="text-muted" style="font-size:0.85rem;">Disponible</span></div>
+                    <div><span class="fw-bold" style="color:var(--accent);">24+</span> <span class="text-muted" style="font-size:0.85rem;">Produits</span></div>
+                    <div><span class="fw-bold" style="color:var(--accent);">6</span> <span class="text-muted" style="font-size:0.85rem;">Catégories</span></div>
+                    <div><span class="fw-bold" style="color:var(--accent);">24/7</span> <span class="text-muted" style="font-size:0.85rem;">Disponible</span></div>
                 </div>
             </div>
         </div>
@@ -93,7 +93,7 @@ $catIcons = ['🎣', '⚙️', '🐟', '🧵', '🪝', '🎒'];
 <!-- CTA -->
 <section class="py-5" style="border-top: 1px solid var(--border);">
     <div class="container">
-        <div class="card text-center" style="padding: 3.5rem 2rem; border-color: rgba(251,191,36,0.1); background: radial-gradient(ellipse at center, rgba(251,191,36,0.04), transparent 70%), var(--bg-card);">
+        <div class="card text-center" style="padding: 3rem 2rem; background: var(--accent-subtle);">
             <h3 class="fw-bold mb-2">Une question ?</h3>
             <p class="mb-3" style="color: var(--text-muted);">Notre équipe est disponible pour vous conseiller sur le choix de votre matériel</p>
             <div><a href="/contact" class="btn btn-primary"><i class="bi bi-envelope me-1"></i>Contactez-nous</a></div>

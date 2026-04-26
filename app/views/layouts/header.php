@@ -37,7 +37,7 @@ if (isLoggedIn()) {
 <?php endif; ?>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="/">
             <span class="brand-icon">🎣</span> Pêche Marine TN
@@ -69,7 +69,7 @@ if (isLoggedIn()) {
                         <a class="nav-link <?= ($uri ?? '') === '/cart' ? 'active' : '' ?>" href="/cart">
                             <i class="bi bi-cart3 me-1"></i>Panier
                             <?php if ($cartCount > 0): ?>
-                                <span class="badge bg-danger rounded-pill"><?= $cartCount ?></span>
+                                <span class="badge rounded-pill" style="background:#ef4444;color:#fff;"><?= $cartCount ?></span>
                             <?php endif; ?>
                         </a>
                     </li>
