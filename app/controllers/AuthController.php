@@ -31,6 +31,7 @@ class AuthController {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_name'] = $user['prenom'];
         $_SESSION['user_role'] = $user['role'];
+        $_SESSION['user_avatar'] = $user['avatar'] ?? null;
         
         flash('success', 'Bienvenue, ' . $user['prenom'] . ' !');
         redirect($user['role'] === 'admin' ? '/admin' : '/');

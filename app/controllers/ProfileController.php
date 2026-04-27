@@ -31,6 +31,20 @@ class ProfileController {
             redirect('/profile');
         }
 
+        // Handle avatar upload
+        if (!empty($_FILES['avatar']['name']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
+            $ext = strtolower(pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION));
+            $allowed = ['jpg', 'jpeg', 'png', 'webp'];
+            if (in_array($ext, $allowed) && $_FILES['avatar']['size'] <= 2 * 1024 * 1024) {
+                $avatarName = 'avatar_' . $userId . '.' . $ext;
+                $dest = BASE_PATH . '/public/assets/images/avatars/' . $avatarName;
+                move_uploaded_file($_FILES['avatar']['tmp_name'], $dest);
+                $stmtAvatar = $db->prepare("UPDATE utilisateur SET avatar=? WHERE id=?");
+                $stmtAvatar->execute([$avatarName, $userId]);
+                $_SESSION['user_avatar'] = $avatarName;
+            }
+        }
+
         // Update basic info
         $stmt = $db->prepare("UPDATE utilisateur SET nom=?, prenom=?, telephone=?, adresse=? WHERE id=?");
         $stmt->execute([$nom, $prenom, $telephone, $adresse, $userId]);

@@ -99,5 +99,11 @@ match(true) {
         => AdminController::updateStatus(),
 
     // 404
-    default => http_response_code(404) ?: require VIEW_PATH . '/404.php',
+    default => (function() {
+        http_response_code(404);
+        $pageTitle = 'Page introuvable — Pêche Marine TN';
+        require VIEW_PATH . '/layouts/header.php';
+        require VIEW_PATH . '/404.php';
+        require VIEW_PATH . '/layouts/footer.php';
+    })(),
 };

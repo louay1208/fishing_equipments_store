@@ -1,16 +1,19 @@
 <div class="auth-container" style="max-width: 520px;">
     <div class="auth-card card">
         <div class="text-center mb-3">
-            <span style="font-size: 2.5rem;">🎣</span>
+            <span style="font-size: 2.5rem;">🌊</span>
         </div>
-        <h2 class="text-center">Créer un Compte</h2>
+        <h2 class="text-center" style="color:var(--ocean);">Créer un Compte</h2>
         <p class="subtitle text-center">Rejoignez la communauté Pêche Marine TN</p>
 
         <form method="POST" action="/register">
             <div class="row g-3 mb-3">
                 <div class="col-6">
                     <label for="nom" class="form-label">Nom *</label>
-                    <input type="text" class="form-control" id="nom" name="nom" value="<?= old('nom') ?>" required>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        <input type="text" class="form-control" id="nom" name="nom" value="<?= old('nom') ?>" required>
+                    </div>
                 </div>
                 <div class="col-6">
                     <label for="prenom" class="form-label">Prénom *</label>
@@ -19,15 +22,24 @@
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Adresse Email *</label>
-                <input type="email" class="form-control" id="email" name="email" value="<?= old('email') ?>" placeholder="votre@email.com" required>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                    <input type="email" class="form-control" id="email" name="email" value="<?= old('email') ?>" placeholder="votre@email.com" required>
+                </div>
             </div>
             <div class="mb-3">
                 <label for="telephone" class="form-label">Téléphone</label>
-                <input type="tel" class="form-control" id="telephone" name="telephone" value="<?= old('telephone') ?>" placeholder="XX XXX XXX">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                    <input type="tel" class="form-control" id="telephone" name="telephone" value="<?= old('telephone') ?>" placeholder="XX XXX XXX">
+                </div>
             </div>
             <div class="mb-3">
                 <label for="adresse" class="form-label">Adresse</label>
-                <input type="text" class="form-control" id="adresse" name="adresse" value="<?= old('adresse') ?>" placeholder="Ville, Tunisie">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+                    <input type="text" class="form-control" id="adresse" name="adresse" value="<?= old('adresse') ?>" placeholder="Ville, Tunisie">
+                </div>
             </div>
             <div class="row g-3 mb-3">
                 <div class="col-6">
@@ -55,7 +67,7 @@
         </form>
 
         <p class="text-center text-muted mb-0">
-            Déjà inscrit ? <a href="/login" class="text-decoration-none" style="color: var(--teal-500);">Se connecter</a>
+            Déjà inscrit ? <a href="/login" class="text-decoration-none" style="color: var(--sea); font-weight:600;">Se connecter</a>
         </p>
     </div>
 </div>

@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS utilisateur (
     mot_de_passe TEXT NOT NULL,
     telephone    TEXT,
     adresse      TEXT,
+    avatar       TEXT,
     role         TEXT NOT NULL DEFAULT 'client' CHECK(role IN ('client','admin')),
     created_at   DATETIME DEFAULT CURRENT_TIMESTAMP
 );

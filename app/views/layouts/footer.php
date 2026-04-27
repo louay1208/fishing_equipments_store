@@ -1,11 +1,19 @@
 </main>
 
-<!-- Footer -->
+<!-- Footer Wave -->
+<div class="footer-wave" style="position:relative;height:50px;overflow:hidden;background:transparent;">
+    <svg viewBox="0 0 1200 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
+         style="position:absolute;bottom:0;left:0;width:200%;height:50px;animation:wave-drift 18s linear infinite;">
+        <path d="M0,25 C150,50 350,0 600,25 C850,50 1050,0 1200,25 L1200,50 L0,50Z" fill="#0c4a6e"/>
+        <path d="M0,35 C200,10 400,45 600,30 C800,15 1000,45 1200,35 L1200,50 L0,50Z" fill="#0c4a6e" opacity="0.5"/>
+    </svg>
+</div>
+
 <footer class="site-footer mt-auto">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6">
-                <p class="mb-0">🎣 <strong>Pêche Marine TN</strong> — Votre partenaire de pêche en Tunisie</p>
+                <p class="mb-0">🌊 <strong>Pêche Marine TN</strong> — Votre partenaire de pêche en Tunisie</p>
             </div>
             <div class="col-md-6 text-md-end">
                 <p class="mb-0">&copy; <?= date('Y') ?> Pêche Marine TN. Tous droits réservés.</p>

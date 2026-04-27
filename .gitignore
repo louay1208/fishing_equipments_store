@@ -11,3 +11,7 @@ desktop.ini
 
 # PHP
 *.log
+
+# Docs
+docs/
+README.md

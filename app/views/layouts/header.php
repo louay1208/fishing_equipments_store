@@ -10,7 +10,7 @@ if (isLoggedIn()) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,28 +19,46 @@ if (isLoggedIn()) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="/assets/css/style.css" rel="stylesheet">
+    <script>
+        (function(){var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);})();
+    </script>
 </head>
 <body>
 
-<!-- Flash Messages -->
-<?php if ($msg = flash('success')): ?>
-    <div class="flash-message alert alert-success alert-dismissible fade show" role="alert">
-        <i class="bi bi-check-circle me-2"></i><?= e($msg) ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-<?php endif; ?>
-<?php if ($msg = flash('error')): ?>
-    <div class="flash-message alert alert-danger alert-dismissible fade show" role="alert">
-        <i class="bi bi-exclamation-circle me-2"></i><?= e($msg) ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-<?php endif; ?>
+<!-- Background Bubbles -->
+<div class="bg-bubbles">
+    <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+    <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+    <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+    <div class="bubble"></div>
+</div>
+
+<!-- Toast Notifications -->
+<div class="toast-container">
+    <?php if ($msg = flash('success')): ?>
+        <div class="toast-notification toast-success">
+            <span class="toast-icon">✅</span>
+            <span><?= e($msg) ?></span>
+            <button class="toast-close">&times;</button>
+        </div>
+    <?php endif; ?>
+    <?php if ($msg = flash('error')): ?>
+        <div class="toast-notification toast-error">
+            <span class="toast-icon">⚠️</span>
+            <span><?= e($msg) ?></span>
+            <button class="toast-close">&times;</button>
+        </div>
+    <?php endif; ?>
+</div>
+
+<!-- Back to Top -->
+<button class="back-to-top" id="backToTop" title="Retour en haut">🌊</button>
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="/">
-            <span class="brand-icon">🎣</span> Pêche Marine TN
+            <span class="brand-icon">⚓</span> Pêche Marine TN
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -79,15 +97,23 @@ if (isLoggedIn()) {
                         </a>
                     </li>
                     <?php if (isAdmin()): ?>
-                        <li class="nav-item">
-                            <a class="nav-link <?= str_starts_with($uri ?? '', '/admin') ? 'active' : '' ?>" href="/admin">
-                                <i class="bi bi-speedometer2 me-1"></i>Admin
+                        <li class="nav-item d-flex align-items-center ms-2">
+                            <span class="vr mx-2" style="opacity:0.2;height:24px;align-self:center;"></span>
+                        </li>
+                        <li class="nav-item d-flex align-items-center">
+                            <a class="btn btn-admin-panel <?= str_starts_with($uri ?? '', '/admin') ? 'active' : '' ?>" href="/admin">
+                                <i class="bi bi-shield-lock me-1"></i>Dashboard Admin
                             </a>
                         </li>
                     <?php endif; ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                            <i class="bi bi-person-circle me-1"></i><?= e($_SESSION['user_name'] ?? '') ?>
+                            <?php if (!empty($_SESSION['user_avatar'])): ?>
+                                <img src="/assets/images/avatars/<?= e($_SESSION['user_avatar']) ?>" style="width:24px;height:24px;border-radius:50%;object-fit:cover;margin-right:4px;vertical-align:middle;">
+                            <?php else: ?>
+                                <i class="bi bi-person-circle me-1"></i>
+                            <?php endif; ?>
+                            <?= e($_SESSION['user_name'] ?? '') ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="/profile"><i class="bi bi-person me-2"></i>Mon Profil</a></li>
@@ -98,13 +124,18 @@ if (isLoggedIn()) {
                 <?php else: ?>
                     <li class="nav-item d-flex align-items-center">
                         <a class="btn btn-outline-secondary btn-sm" href="/login">
-                            <i class="bi bi-box-arrow-in-right me-1"></i>Connexion
+                            <i class="bi bi-person me-1"></i>Connexion
                         </a>
                     </li>
                     <li class="nav-item d-flex align-items-center ms-2">
                         <a class="btn btn-primary btn-sm" href="/register">S'inscrire</a>
                     </li>
                 <?php endif; ?>
+                    <li class="nav-item d-flex align-items-center ms-2">
+                        <button class="theme-toggle" id="themeToggle" title="Changer le thème">
+                            <i class="bi bi-moon-fill"></i>
+                        </button>
+                    </li>
             </ul>
         </div>
     </div>
