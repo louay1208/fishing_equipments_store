@@ -77,3 +77,25 @@ CREATE TABLE IF NOT EXISTS contact (
     message    TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS avis (
+    id             INTEGER PRIMARY KEY AUTOINCREMENT,
+    utilisateur_id INTEGER NOT NULL,
+    produit_id     INTEGER NOT NULL,
+    note           INTEGER NOT NULL CHECK(note BETWEEN 1 AND 5),
+    commentaire    TEXT,
+    created_at     DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id),
+    FOREIGN KEY (produit_id) REFERENCES produit(id) ON DELETE CASCADE,
+    UNIQUE(utilisateur_id, produit_id)
+);
+
+CREATE TABLE IF NOT EXISTS favori (
+    id             INTEGER PRIMARY KEY AUTOINCREMENT,
+    utilisateur_id INTEGER NOT NULL,
+    produit_id     INTEGER NOT NULL,
+    created_at     DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (utilisateur_id) REFERENCES utilisateur(id),
+    FOREIGN KEY (produit_id) REFERENCES produit(id) ON DELETE CASCADE,
+    UNIQUE(utilisateur_id, produit_id)
+);

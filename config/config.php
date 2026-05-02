@@ -3,6 +3,22 @@
 define('APP_NAME', 'Pêche Marine TN');
 define('APP_URL', 'http://localhost:8000');
 
+// ═══════════════════════════════════════════
+// DATABASE CONFIGURATION
+// ═══════════════════════════════════════════
+//
+// DB_MODE = 'sqlite' → Zero config, uses local file (default)
+// DB_MODE = 'mysql'  → XAMPP / production MySQL server
+//
+// To use MySQL (XAMPP), change 'sqlite' to 'mysql' below:
+define('DB_MODE', 'sqlite');
+
+// MySQL settings (only used when DB_MODE = 'mysql')
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'peche_marine');
+define('DB_USER', 'root');
+define('DB_PASS', '');    // XAMPP default = empty
+
 // Paths (may already be defined by front controller)
 if (!defined('BASE_PATH')) define('BASE_PATH', dirname(__DIR__));
 if (!defined('APP_PATH'))  define('APP_PATH', BASE_PATH . '/app');

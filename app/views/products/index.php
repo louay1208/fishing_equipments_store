@@ -92,21 +92,39 @@
                     <?php foreach ($products as $product): ?>
                         <div class="col-6 col-md-4">
                             <div class="card product-card h-100">
-                                <a href="/products/<?= $product['id'] ?>" style="position:relative; display:block; overflow:hidden;">
-                                    <?php if (!empty($product['image'])): ?>
-                                        <img src="/assets/images/products/<?= e($product['image']) ?>" class="card-img-top" alt="<?= e($product['nom']) ?>">
-                                    <?php else: ?>
-                                        <div class="product-img-placeholder"><i class="bi bi-image"></i></div>
-                                    <?php endif; ?>
+                                <div style="position:relative; overflow:hidden;">
+                                    <a href="/products/<?= $product['id'] ?>" style="display:block;">
+                                        <?php if (!empty($product['image'])): ?>
+                                            <img src="/assets/images/products/<?= e($product['image']) ?>" class="card-img-top" alt="<?= e($product['nom']) ?>">
+                                        <?php else: ?>
+                                            <div class="product-img-placeholder"><i class="bi bi-image"></i></div>
+                                        <?php endif; ?>
+                                    </a>
                                     <?php if ($product['quantite_stock'] == 0): ?>
-                                        <span style="position:absolute;top:8px;right:8px;" class="badge bg-danger">Épuisé</span>
+                                        <span style="position:absolute;top:8px;left:8px;" class="badge bg-danger">Épuisé</span>
                                     <?php elseif ($product['quantite_stock'] <= 5): ?>
-                                        <span style="position:absolute;top:8px;right:8px;" class="badge" style="background:var(--sand-subtle);color:var(--sand);">Dernières pièces</span>
+                                        <span style="position:absolute;top:8px;left:8px;" class="badge" style="background:var(--sand-subtle);color:var(--sand);">Dernières pièces</span>
                                     <?php endif; ?>
-                                </a>
+                                    <?php if (isLoggedIn()): ?>
+                                        <form method="POST" action="/wishlist/toggle" style="position:absolute;top:8px;right:8px;">
+                                            <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
+                                            <button type="submit" class="btn btn-sm" style="background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:32px;height:32px;padding:0;color:<?= in_array($product['id'], $wishlistIds) ? '#ef4444' : '#94a3b8' ?>;font-size:0.95rem;" title="Favoris">
+                                                <i class="bi bi-heart<?= in_array($product['id'], $wishlistIds) ? '-fill' : '' ?>"></i>
+                                            </button>
+                                        </form>
+                                    <?php endif; ?>
+                                </div>
                                 <div class="card-body d-flex flex-column">
                                     <span class="product-category"><?= e($product['categorie_nom'] ?? '') ?></span>
                                     <a href="/products/<?= $product['id'] ?>" class="product-name text-decoration-none"><?= e($product['nom']) ?></a>
+                                    <?php if ($product['review_count'] > 0): ?>
+                                        <div class="d-flex align-items-center gap-1 mt-1" style="font-size:0.75rem;">
+                                            <?php for ($i = 1; $i <= 5; $i++): ?>
+                                                <i class="bi bi-star<?= $i <= round($product['avg_rating']) ? '-fill' : '' ?>" style="color:#f59e0b;"></i>
+                                            <?php endfor; ?>
+                                            <span class="text-muted ms-1">(<?= $product['review_count'] ?>)</span>
+                                        </div>
+                                    <?php endif; ?>
                                     <div class="mt-auto pt-2">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <span class="product-price"><?= number_format($product['prix'], 2) ?> DT</span>

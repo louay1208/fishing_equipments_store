@@ -73,7 +73,7 @@
 
             <!-- Order Summary -->
             <div class="col-lg-4">
-                <div class="card p-4" style="border-top: 3px solid var(--ocean);">
+                <div class="card p-4 cart-summary-sticky" style="border-top: 3px solid var(--ocean);">
                     <h5 class="fw-bold mb-3" style="color:var(--ocean);">⚓ Résumé</h5>
                     <div class="d-flex justify-content-between mb-2">
                         <span class="text-muted">Sous-total</span>

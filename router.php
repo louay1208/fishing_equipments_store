@@ -19,6 +19,11 @@ require_once APP_PATH . '/controllers/OrderController.php';
 require_once APP_PATH . '/controllers/ProfileController.php';
 require_once APP_PATH . '/controllers/ContactController.php';
 require_once APP_PATH . '/controllers/AdminController.php';
+require_once APP_PATH . '/controllers/AboutController.php';
+require_once APP_PATH . '/controllers/ReviewController.php';
+require_once APP_PATH . '/controllers/WishlistController.php';
+require_once APP_PATH . '/controllers/FaqController.php';
+require_once APP_PATH . '/controllers/WeatherController.php';
 
 // Simple router
 match(true) {
@@ -75,6 +80,34 @@ match(true) {
         => ContactController::index(),
     $uri === '/contact' && $method === 'POST'
         => ContactController::store(),
+
+    // About
+    $uri === '/about' && $method === 'GET'
+        => AboutController::index(),
+
+    // FAQ
+    $uri === '/faq' && $method === 'GET'
+        => FaqController::index(),
+
+    // Weather
+    $uri === '/meteo' && $method === 'GET'
+        => WeatherController::index(),
+
+    // Reviews
+    $uri === '/reviews/store' && $method === 'POST'
+        => ReviewController::store(),
+    $uri === '/reviews/delete' && $method === 'POST'
+        => ReviewController::delete(),
+
+    // Wishlist
+    $uri === '/wishlist' && $method === 'GET'
+        => WishlistController::index(),
+    $uri === '/wishlist/toggle' && $method === 'POST'
+        => WishlistController::toggle(),
+
+    // API
+    $uri === '/api/search' && $method === 'GET'
+        => ProductController::search(),
 
     // Admin
     $uri === '/admin' && $method === 'GET'

@@ -12,10 +12,18 @@
 <footer class="site-footer mt-auto">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <p class="mb-0">🌊 <strong>Pêche Marine TN</strong> — Votre partenaire de pêche en Tunisie</p>
             </div>
-            <div class="col-md-6 text-md-end">
+            <div class="col-md-4 text-center">
+                <div class="d-flex justify-content-center gap-3" style="font-size:0.85rem;">
+                    <a href="/about" class="text-decoration-none" style="color:inherit; opacity:0.8;">À propos</a>
+                    <a href="/faq" class="text-decoration-none" style="color:inherit; opacity:0.8;">FAQ</a>
+                    <a href="/meteo" class="text-decoration-none" style="color:inherit; opacity:0.8;">Météo</a>
+                    <a href="/contact" class="text-decoration-none" style="color:inherit; opacity:0.8;">Contact</a>
+                </div>
+            </div>
+            <div class="col-md-4 text-md-end">
                 <p class="mb-0">&copy; <?= date('Y') ?> Pêche Marine TN. Tous droits réservés.</p>
             </div>
         </div>

@@ -24,6 +24,24 @@ class AdminController {
         // Recent contact messages
         $recentContacts = $db->query("SELECT * FROM contact ORDER BY created_at DESC LIMIT 3")->fetchAll();
 
+        // Chart data: monthly revenue (last 6 months)
+        $monthlyRevenue = $db->query("
+            SELECT strftime('%Y-%m', date_commande) as month, SUM(total) as revenue, COUNT(*) as orders
+            FROM commande WHERE statut != 'annulee'
+            GROUP BY month ORDER BY month DESC LIMIT 6
+        ")->fetchAll();
+        $monthlyRevenue = array_reverse($monthlyRevenue);
+
+        // Chart data: top 5 selling products
+        $topProducts = $db->query("
+            SELECT p.nom, SUM(lc.quantite) as total_sold, SUM(lc.quantite * lc.prix_unitaire) as total_revenue
+            FROM ligne_commande lc
+            JOIN produit p ON p.id = lc.produit_id
+            JOIN commande c ON c.id = lc.commande_id
+            WHERE c.statut != 'annulee'
+            GROUP BY lc.produit_id ORDER BY total_sold DESC LIMIT 5
+        ")->fetchAll();
+
         $pageTitle = 'Admin — Pêche Marine TN';
         require VIEW_PATH . '/layouts/header.php';
         require VIEW_PATH . '/admin/dashboard.php';

@@ -47,6 +47,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ─── Loading spinner on form submit ───
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', function() {
+            const btn = this.querySelector('button[type="submit"]:not(.btn-sm):not(.qty-btn)');
+            if (btn && !btn.classList.contains('is-loading') && !this.classList.contains('add-to-cart-form') && !this.classList.contains('qty-control')) {
+                btn.classList.add('is-loading');
+            }
+        });
+    });
+
+    // ─── Cart remove confirmation ───
+    document.querySelectorAll('form[action="/cart/remove"]').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            if (!confirm('Retirer ce produit du panier ?')) {
+                e.preventDefault();
+            }
+        });
+    });
+
     // ─── Animated Counters ───
     document.querySelectorAll('[data-count]').forEach(el => {
         const target = parseInt(el.dataset.count);
@@ -126,19 +145,80 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ─── Dark mode toggle ───
-    const themeToggle = document.getElementById('themeToggle');
-    if (themeToggle) {
-        const updateIcon = () => {
-            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            themeToggle.querySelector('i').className = isDark ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
-        };
-        updateIcon();
-        themeToggle.addEventListener('click', () => {
+    const themeToggles = document.querySelectorAll('#themeToggle, #themeToggleMobile');
+    const updateAllIcons = () => {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        themeToggles.forEach(btn => {
+            const icon = btn.querySelector('i');
+            if (icon) icon.className = isDark ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+        });
+    };
+    updateAllIcons();
+    themeToggles.forEach(btn => {
+        btn.addEventListener('click', () => {
             const current = document.documentElement.getAttribute('data-theme');
             const next = current === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', next);
             localStorage.setItem('theme', next);
-            updateIcon();
+            updateAllIcons();
+        });
+    });
+
+    // ─── AJAX Navbar Search ───
+    const searchInput = document.getElementById('navbarSearch');
+    const searchResults = document.getElementById('searchResults');
+    if (searchInput && searchResults) {
+        let searchTimer = null;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(searchTimer);
+            const q = this.value.trim();
+            if (q.length < 2) {
+                searchResults.classList.remove('active');
+                searchResults.innerHTML = '';
+                return;
+            }
+            searchTimer = setTimeout(() => {
+                fetch('/api/search?q=' + encodeURIComponent(q))
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.length === 0) {
+                            searchResults.innerHTML = '<div class="search-no-results">Aucun produit trouvé</div>';
+                        } else {
+                            searchResults.innerHTML = data.map(p => `
+                                <a href="/products/${p.id}" class="search-result-item">
+                                    ${p.image
+                                        ? `<img src="/assets/images/products/${p.image}" alt="">`
+                                        : `<div style="width:40px;height:40px;border-radius:6px;background:var(--sea-subtle);display:flex;align-items:center;justify-content:center;font-size:1rem;"><i class="bi bi-image"></i></div>`
+                                    }
+                                    <div class="sr-info">
+                                        <div class="sr-name">${p.nom}</div>
+                                        <div class="sr-cat">${p.categorie_nom || ''}</div>
+                                    </div>
+                                    <span class="sr-price">${parseFloat(p.prix).toFixed(2)} DT</span>
+                                </a>
+                            `).join('');
+                        }
+                        searchResults.classList.add('active');
+                    })
+                    .catch(() => {
+                        searchResults.classList.remove('active');
+                    });
+            }, 300);
+        });
+
+        // Close on click outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.navbar-search-wrapper')) {
+                searchResults.classList.remove('active');
+            }
+        });
+
+        // Close on Escape
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                searchResults.classList.remove('active');
+                searchInput.blur();
+            }
         });
     }
 });

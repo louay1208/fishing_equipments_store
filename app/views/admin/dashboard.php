@@ -82,6 +82,161 @@ $adminName = $_SESSION['user_name'] ?? 'Admin';
         </div>
     </div>
 
+    <!-- Charts Row -->
+    <div class="row g-3 mb-4">
+        <!-- Revenue & Orders Chart -->
+        <div class="col-lg-8">
+            <div class="admin-panel">
+                <div class="admin-panel-header">
+                    <h6><i class="bi bi-graph-up me-2"></i>Chiffre d'Affaires & Commandes</h6>
+                </div>
+                <div style="padding:1rem;">
+                    <canvas id="revenueChart" height="260"></canvas>
+                </div>
+            </div>
+        </div>
+        <!-- Order Status Doughnut -->
+        <div class="col-lg-4">
+            <div class="admin-panel">
+                <div class="admin-panel-header">
+                    <h6><i class="bi bi-pie-chart-fill me-2"></i>Statut Commandes</h6>
+                </div>
+                <div style="padding:1rem; display:flex; align-items:center; justify-content:center;">
+                    <canvas id="statusChart" height="220"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Products Chart -->
+    <div class="row g-3 mb-4">
+        <div class="col-12">
+            <div class="admin-panel">
+                <div class="admin-panel-header">
+                    <h6><i class="bi bi-trophy me-2"></i>Top 5 Produits les Plus Vendus</h6>
+                </div>
+                <div style="padding:1rem;">
+                    <canvas id="topProductsChart" height="180"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const gridColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)';
+        const textColor = isDark ? '#94a3b8' : '#64748b';
+        const monthNames = ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
+
+        Chart.defaults.color = textColor;
+        Chart.defaults.borderColor = gridColor;
+
+        // Revenue & Orders Chart
+        const revenueData = <?= json_encode($monthlyRevenue) ?>;
+        const labels = revenueData.map(d => {
+            const [y, m] = d.month.split('-');
+            return monthNames[parseInt(m)-1] + ' ' + y.slice(2);
+        });
+
+        new Chart(document.getElementById('revenueChart'), {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Revenus (DT)',
+                        data: revenueData.map(d => d.revenue),
+                        backgroundColor: 'rgba(14,165,233,0.6)',
+                        borderColor: '#0ea5e9',
+                        borderWidth: 2,
+                        borderRadius: 6,
+                        order: 2,
+                    },
+                    {
+                        label: 'Commandes',
+                        data: revenueData.map(d => d.orders),
+                        type: 'line',
+                        borderColor: '#d97706',
+                        backgroundColor: 'rgba(217,119,6,0.1)',
+                        borderWidth: 3,
+                        pointRadius: 5,
+                        pointBackgroundColor: '#d97706',
+                        fill: true,
+                        tension: 0.3,
+                        yAxisID: 'y1',
+                        order: 1,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                interaction: { mode: 'index', intersect: false },
+                plugins: { legend: { position: 'top' } },
+                scales: {
+                    y: { beginAtZero: true, title: { display: true, text: 'DT' }, grid: { color: gridColor } },
+                    y1: { beginAtZero: true, position: 'right', title: { display: true, text: 'Commandes' }, grid: { display: false } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // Order Status Doughnut
+        const statusData = <?= json_encode($ordersByStatus) ?>;
+        const statusLabels = { en_attente: 'En attente', confirmee: 'Confirmée', expediee: 'Expédiée', livree: 'Livrée', annulee: 'Annulée' };
+        const statusColors = { en_attente: '#f59e0b', confirmee: '#3b82f6', expediee: '#8b5cf6', livree: '#22c55e', annulee: '#ef4444' };
+        const sLabels = Object.keys(statusData).map(k => statusLabels[k] || k);
+        const sValues = Object.values(statusData).map(Number);
+        const sColors = Object.keys(statusData).map(k => statusColors[k] || '#94a3b8');
+
+        new Chart(document.getElementById('statusChart'), {
+            type: 'doughnut',
+            data: {
+                labels: sLabels,
+                datasets: [{
+                    data: sValues,
+                    backgroundColor: sColors,
+                    borderWidth: 2,
+                    borderColor: isDark ? '#1e293b' : '#fff',
+                }]
+            },
+            options: {
+                responsive: true,
+                cutout: '60%',
+                plugins: {
+                    legend: { position: 'bottom', labels: { padding: 12, usePointStyle: true, pointStyle: 'circle' } }
+                }
+            }
+        });
+
+        // Top Products Bar
+        const topData = <?= json_encode($topProducts) ?>;
+        new Chart(document.getElementById('topProductsChart'), {
+            type: 'bar',
+            data: {
+                labels: topData.map(p => p.nom.length > 25 ? p.nom.substring(0,25)+'…' : p.nom),
+                datasets: [{
+                    label: 'Unités vendues',
+                    data: topData.map(p => p.total_sold),
+                    backgroundColor: ['#0ea5e9','#06b6d4','#14b8a6','#22c55e','#84cc16'],
+                    borderRadius: 6,
+                    borderSkipped: false,
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { beginAtZero: true, grid: { color: gridColor }, title: { display: true, text: 'Quantité vendue' } },
+                    y: { grid: { display: false } }
+                }
+            }
+        });
+    });
+    </script>
+
     <!-- Two-column: Low Stock + Order Breakdown -->
     <div class="row g-3 mb-4">
         <!-- Low Stock Alerts -->

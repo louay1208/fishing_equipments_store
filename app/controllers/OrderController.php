@@ -128,7 +128,7 @@ class OrderController {
             redirect('/orders');
         }
 
-        $stmt = $db->prepare("SELECT lc.*, p.nom as produit_nom FROM ligne_commande lc JOIN produit p ON p.id = lc.produit_id WHERE lc.commande_id = ?");
+        $stmt = $db->prepare("SELECT lc.*, p.nom as produit_nom, p.image as produit_image FROM ligne_commande lc JOIN produit p ON p.id = lc.produit_id WHERE lc.commande_id = ?");
         $stmt->execute([$id]);
         $lines = $stmt->fetchAll();
 
