@@ -6,11 +6,12 @@
 
 ---
 
-## 📋 Table des matières
+## Table des matières
 
+0. [Récupérer le projet depuis GitHub](#0--récupérer-le-projet-depuis-github)
 1. [Prérequis](#1--prérequis)
 2. [Installer XAMPP](#2--installer-xampp)
-3. [Copier le projet](#3--copier-le-projet)
+3. [Copier le projet dans XAMPP](#3--copier-le-projet-dans-xampp)
 4. [Configurer PHP (php.ini)](#4--configurer-php-phpini)
 5. [Corriger les chemins XAMPP](#5--corriger-les-chemins-xampp)
 6. [Configurer Apache (VirtualHost)](#6--configurer-apache-virtualhost)
@@ -19,6 +20,39 @@
 9. [Créer et peupler la base de données](#9--créer-et-peupler-la-base-de-données)
 10. [Démarrer et tester](#10--démarrer-et-tester)
 11. [Résolution de problèmes](#11--résolution-de-problèmes)
+
+---
+
+## 0 — Récupérer le projet depuis GitHub
+
+### Option A — Avec Git (recommandé)
+
+Si Git est installé sur votre PC (téléchargeable sur https://git-scm.com/downloads) :
+
+1. Ouvrir **PowerShell** (menu Démarrer → taper `powershell`)
+2. Se placer dans le dossier où vous voulez télécharger le projet :
+   ```powershell
+   cd C:\Users\VOTRE_NOM\Documents
+   ```
+3. Cloner le projet :
+   ```powershell
+   git clone https://github.com/louay1208/fishing_equipments_store.git
+   ```
+4. Aller dans le dossier et choisir la branche `dev` :
+   ```powershell
+   cd fishing_equipments_store
+   git checkout dev
+   ```
+
+Vous avez maintenant un dossier `fishing_equipments_store` avec tout le code.
+
+### Option B — Sans Git (téléchargement ZIP)
+
+1. Ouvrir dans le navigateur : https://github.com/louay1208/fishing_equipments_store
+2. Cliquer sur le bouton vert **Code** → **Download ZIP**
+3. **IMPORTANT** : avant de télécharger, changer la branche de `main` à **`dev`** (menu déroulant en haut à gauche)
+4. Extraire le fichier ZIP dans un dossier de votre choix
+5. Renommer le dossier extrait en `fishing_equipments_store`
 
 ---
 
@@ -80,16 +114,23 @@ C:\xampp
 
 ---
 
-## 3 — Copier le projet
+## 3 — Copier le projet dans XAMPP
 
-Copier l'intégralité du dossier projet dans le répertoire `htdocs` de XAMPP :
+Maintenant il faut copier le projet (récupéré à l'étape 0) dans le dossier `htdocs` de XAMPP.
+
+### Méthode simple (Explorateur de fichiers)
+
+1. Ouvrir le dossier où vous avez cloné/extrait le projet
+2. **Copier** le dossier `fishing_equipments_store` (Ctrl+C)
+3. Ouvrir `C:\xampp\htdocs\` dans l'Explorateur
+4. **Coller** le dossier (Ctrl+V)
+5. **Renommer** le dossier en `peche-marine`
+
+### Méthode PowerShell
 
 ```powershell
-# Depuis PowerShell
-Copy-Item -Recurse "CHEMIN_DU_PROJET" "C:\xampp\htdocs\peche-marine"
+Copy-Item -Recurse "C:\Users\VOTRE_NOM\Documents\fishing_equipments_store" "C:\xampp\htdocs\peche-marine"
 ```
-
-Ou manuellement : copier/coller le dossier dans `C:\xampp\htdocs\` et le renommer `peche-marine`.
 
 La structure finale doit être :
 
@@ -546,6 +587,12 @@ cmd /c "C:\xampp\mysql\bin\mysql.exe -u root --default-character-set=utf8mb4 < C
 ## ✅ Checklist de déploiement
 
 Cocher chaque étape au fur et à mesure :
+
+### Récupérer le code
+```
+[ ] Projet cloné depuis GitHub (git clone) ou ZIP téléchargé
+[ ] Branche dev sélectionnée (git checkout dev)
+```
 
 ### Installation
 ```
