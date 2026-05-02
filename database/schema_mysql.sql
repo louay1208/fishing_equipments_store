@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS utilisateur (
     id           INT AUTO_INCREMENT PRIMARY KEY,
     nom          VARCHAR(100) NOT NULL,
     prenom       VARCHAR(100) NOT NULL,
-    email        VARCHAR(255) NOT NULL UNIQUE,
+    email        VARCHAR(191) NOT NULL UNIQUE,
     mot_de_passe VARCHAR(255) NOT NULL,
     telephone    VARCHAR(20),
     adresse      TEXT,
@@ -82,8 +82,8 @@ CREATE TABLE IF NOT EXISTS ligne_commande (
 CREATE TABLE IF NOT EXISTS contact (
     id         INT AUTO_INCREMENT PRIMARY KEY,
     nom        VARCHAR(100) NOT NULL,
-    email      VARCHAR(255) NOT NULL,
-    sujet      VARCHAR(255) NOT NULL,
+    email      VARCHAR(191) NOT NULL,
+    sujet      VARCHAR(191) NOT NULL,
     message    TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
