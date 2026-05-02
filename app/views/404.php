@@ -1,7 +1,7 @@
 <div class="page-404">
     <div class="ocean-floor"></div>
     <div style="position:relative; z-index:1;">
-        <span class="lost-boat">🚢</span>
+        <span class="lost-boat"><i class="bi bi-compass" style="font-size:3rem;"></i></span>
         <h1>404</h1>
         <h2>Perdu en mer !</h2>
         <p class="mt-2 mb-4">La page que vous cherchez semble avoir été emportée par les vagues...</p>

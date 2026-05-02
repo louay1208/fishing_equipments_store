@@ -7,7 +7,7 @@
 <div class="container pb-5">
     <?php if (empty($items)): ?>
         <div class="empty-state">
-            <div class="icon">🌊</div>
+            <div class="icon"><i class="bi bi-cart3" style="font-size:2.5rem;color:var(--ocean);"></i></div>
             <h5 style="color:var(--ocean);">Votre panier est vide</h5>
             <p class="text-muted">Explorez notre catalogue et trouvez l'équipement parfait pour votre prochaine sortie</p>
             <a href="/products" class="btn btn-primary"><i class="bi bi-compass me-1"></i>Explorer le Catalogue</a>
@@ -74,13 +74,13 @@
             <!-- Order Summary -->
             <div class="col-lg-4">
                 <div class="card p-4 cart-summary-sticky" style="border-top: 3px solid var(--ocean);">
-                    <h5 class="fw-bold mb-3" style="color:var(--ocean);">⚓ Résumé</h5>
+                    <h5 class="fw-bold mb-3" style="color:var(--ocean);"><i class="bi bi-receipt me-1"></i>Résumé</h5>
                     <div class="d-flex justify-content-between mb-2">
                         <span class="text-muted">Sous-total</span>
                         <span><?= number_format($subtotal, 2) ?> DT</span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
-                        <span class="text-muted">🚚 Livraison</span>
+                        <span class="text-muted">Livraison</span>
                         <span><?= number_format($shipping, 2) ?> DT</span>
                     </div>
                     <hr>

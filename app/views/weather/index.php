@@ -105,41 +105,23 @@
 
 <script>
 (function() {
-    // ═══ ALL TUNISIAN COASTAL FISHING SPOTS ═══
     const CITIES = [
         // Nord
-        { name: 'Tabarka',       lat: 36.95, lon:  8.76, icon: '🪸', region: 'Nord',     desc: 'Côte corallienne' },
-        { name: 'Bizerte',       lat: 37.27, lon:  9.87, icon: '⚓', region: 'Nord',     desc: 'Port de pêche' },
-        { name: 'Ghar El Melh', lat: 37.16, lon: 10.19, icon: '🦐', region: 'Nord',     desc: 'Lagune historique' },
-
-        // Grand Tunis
-        { name: 'La Goulette',   lat: 36.82, lon: 10.31, icon: '🚢', region: 'Grand Tunis', desc: 'Port de Tunis' },
-        { name: 'La Marsa',      lat: 36.88, lon: 10.33, icon: '🏖️', region: 'Grand Tunis', desc: 'Plage nord' },
-        { name: 'Sidi Bou Saïd', lat: 36.87, lon: 10.35, icon: '🎨', region: 'Grand Tunis', desc: 'Village pittoresque' },
-
+        { name: 'Bizerte',   lat: 37.27, lon:  9.87, icon: '⚓', region: 'Nord',   desc: 'Port de pêche' },
+        { name: 'Tabarka',   lat: 36.95, lon:  8.76, icon: '🪸', region: 'Nord',   desc: 'Côte corallienne' },
         // Cap Bon
-        { name: 'Nabeul',        lat: 36.45, lon: 10.74, icon: '🍊', region: 'Cap Bon',  desc: 'Golfe de Hammamet' },
-        { name: 'Hammamet',      lat: 36.40, lon: 10.62, icon: '🏝️', region: 'Cap Bon',  desc: 'Station balnéaire' },
-        { name: 'Kélibia',       lat: 36.85, lon: 11.10, icon: '🐟', region: 'Cap Bon',  desc: 'Premier port de pêche' },
-        { name: 'El Haouaria',   lat: 37.05, lon: 11.01, icon: '🦅', region: 'Cap Bon',  desc: 'Pointe du Cap Bon' },
-        { name: 'Korba',         lat: 36.57, lon: 10.86, icon: '🦩', region: 'Cap Bon',  desc: 'Lagune côtière' },
-
+        { name: 'Kélibia',   lat: 36.85, lon: 11.10, icon: '🐟', region: 'Cap Bon', desc: 'Port de pêche' },
+        { name: 'Hammamet',  lat: 36.40, lon: 10.62, icon: '🏖️', region: 'Cap Bon', desc: 'Station balnéaire' },
         // Sahel
-        { name: 'Sousse',        lat: 35.83, lon: 10.59, icon: '🌊', region: 'Sahel',    desc: 'Perle du Sahel' },
-        { name: 'Monastir',      lat: 35.77, lon: 10.83, icon: '🎣', region: 'Sahel',    desc: 'Marina & ribat' },
-        { name: 'Mahdia',        lat: 35.50, lon: 11.06, icon: '🐠', region: 'Sahel',    desc: 'Capitale de la pêche' },
-        { name: 'Chebba',        lat: 35.24, lon: 11.11, icon: '🐙', region: 'Sahel',    desc: 'Pêche artisanale' },
-
+        { name: 'Sousse',    lat: 35.83, lon: 10.59, icon: '🌊', region: 'Sahel',  desc: 'Perle du Sahel' },
+        { name: 'Mahdia',    lat: 35.50, lon: 11.06, icon: '🐠', region: 'Sahel',  desc: 'Capitale de la pêche' },
         // Sud
-        { name: 'Sfax',          lat: 34.74, lon: 10.76, icon: '🦑', region: 'Sud',      desc: 'Deuxième ville' },
-        { name: 'Kerkennah',     lat: 34.70, lon: 11.17, icon: '🏝️', region: 'Sud',      desc: 'Îles & charfia' },
-        { name: 'Gabès',         lat: 33.88, lon: 10.10, icon: '🌴', region: 'Sud',      desc: 'Golfe de Gabès' },
-        { name: 'Djerba',        lat: 33.80, lon: 10.85, icon: '☀️',  region: 'Sud',      desc: 'Île des rêves' },
-        { name: 'Zarzis',        lat: 33.50, lon: 11.11, icon: '🐢', region: 'Sud',      desc: 'Côte saharienne' },
+        { name: 'Gabès',     lat: 33.88, lon: 10.10, icon: '🌴', region: 'Sud',    desc: 'Golfe de Gabès' },
+        { name: 'Djerba',    lat: 33.80, lon: 10.85, icon: '☀️',  region: 'Sud',    desc: 'Île des rêves' },
     ];
 
     const REGION_ICONS = {
-        'Nord': '🧭', 'Grand Tunis': '🏛️', 'Cap Bon': '🍊', 'Sahel': '⛵', 'Sud': '🌴'
+        'Nord': '🧭', 'Cap Bon': '🍊', 'Sahel': '⛵', 'Sud': '🌴'
     };
 
     const WEATHER_CODES = {

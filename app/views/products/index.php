@@ -3,7 +3,7 @@
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
             <div>
                 <h1 style="color:var(--ocean);"><i class="bi bi-compass me-2"></i>Catalogue</h1>
-                <p class="text-muted mb-0">🐟 <?= $total ?> produit<?= $total > 1 ? 's' : '' ?> trouvé<?= $total > 1 ? 's' : '' ?><?= $search ? ' pour "'.e($search).'"' : '' ?></p>
+                <p class="text-muted mb-0"><?= $total ?> produit<?= $total > 1 ? 's' : '' ?> trouvé<?= $total > 1 ? 's' : '' ?><?= $search ? ' pour "'.e($search).'"' : '' ?></p>
             </div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0" style="font-size:0.85rem;">
@@ -39,17 +39,17 @@
                 <h6 class="fw-bold mb-3" style="color:var(--ocean);"><i class="bi bi-tag me-1"></i>Catégories</h6>
                 <a href="/products" class="d-flex align-items-center justify-content-between mb-2 text-decoration-none px-2 py-1 rounded <?= !$categoryId ? 'fw-bold' : '' ?>" 
                    style="color: <?= !$categoryId ? 'var(--ocean)' : 'var(--text-secondary)' ?>; <?= !$categoryId ? 'background:var(--sea-subtle);' : '' ?>">
-                    <span>🌊 Toutes les catégories</span>
+                    <span>Toutes les catégories</span>
                     <span class="badge" style="background:var(--bg-surface); color:var(--text-muted); font-size:0.7rem;"><?= $total ?></span>
                 </a>
                 <?php 
-                $catIcons = ['🐟', '🎣', '⚓', '🌊', '🪝', '🧭', '🐠', '🦈'];
+                $catIcons = [];
                 foreach ($categories as $ci => $cat): 
                 ?>
                     <a href="/products?category=<?= $cat['id'] ?>" 
                        class="d-flex align-items-center justify-content-between mb-1 text-decoration-none px-2 py-1 rounded <?= $categoryId == $cat['id'] ? 'fw-bold' : '' ?>"
                        style="color: <?= $categoryId == $cat['id'] ? 'var(--ocean)' : 'var(--text-secondary)' ?>; <?= $categoryId == $cat['id'] ? 'background:var(--sea-subtle);' : '' ?> transition: all 0.2s;">
-                        <span><?= $catIcons[$ci] ?? '🐠' ?> <?= e($cat['nom']) ?></span>
+                        <span><?= e($cat['nom']) ?></span>
                     </a>
                 <?php endforeach; ?>
             </div>
@@ -61,28 +61,21 @@
                     <?php if ($categoryId): ?><input type="hidden" name="category" value="<?= (int)$categoryId ?>"><?php endif; ?>
                     <?php if ($search): ?><input type="hidden" name="q" value="<?= e($search) ?>"><?php endif; ?>
                     <select class="form-select" name="sort" onchange="this.form.submit()">
-                        <option value="newest" <?= $sort === 'newest' ? 'selected' : '' ?>>🕐 Plus récents</option>
-                        <option value="price_asc" <?= $sort === 'price_asc' ? 'selected' : '' ?>>💰 Prix croissant</option>
-                        <option value="price_desc" <?= $sort === 'price_desc' ? 'selected' : '' ?>>💎 Prix décroissant</option>
-                        <option value="name" <?= $sort === 'name' ? 'selected' : '' ?>>🔤 Nom A-Z</option>
+                        <option value="newest" <?= $sort === 'newest' ? 'selected' : '' ?>>Plus récents</option>
+                        <option value="price_asc" <?= $sort === 'price_asc' ? 'selected' : '' ?>>Prix croissant</option>
+                        <option value="price_desc" <?= $sort === 'price_desc' ? 'selected' : '' ?>>Prix décroissant</option>
+                        <option value="name" <?= $sort === 'name' ? 'selected' : '' ?>>Nom A-Z</option>
                     </select>
                 </form>
             </div>
 
-            <!-- Help Box -->
-            <div class="card p-3 text-center" style="background: linear-gradient(135deg, var(--ocean), var(--ocean-light)); border:none;">
-                <div style="font-size:1.5rem; margin-bottom:0.5rem;">🎣</div>
-                <h6 class="fw-bold mb-1" style="color:#fff; font-size:0.88rem;">Besoin de conseils ?</h6>
-                <p style="color:#bae6fd; font-size:0.78rem; margin-bottom:0.6rem;">Notre équipe vous aide à choisir le bon matériel</p>
-                <a href="/contact" class="btn btn-sm" style="background:#fff; color:var(--ocean); font-weight:600; border-radius:6px;">Contactez-nous</a>
-            </div>
         </div>
 
         <!-- Product Grid -->
         <div class="col-lg-9">
             <?php if (empty($products)): ?>
                 <div class="empty-state">
-                    <div class="icon">🐟</div>
+                    <div class="icon"><i class="bi bi-search" style="font-size:2.5rem;color:var(--ocean);"></i></div>
                     <h5 style="color:var(--ocean);">Aucun produit trouvé</h5>
                     <p class="text-muted">Essayez avec d'autres critères de recherche</p>
                     <a href="/products" class="btn btn-primary">Voir tout le catalogue</a>

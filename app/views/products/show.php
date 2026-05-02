@@ -2,7 +2,7 @@
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">🏠 Accueil</a></li>
+            <li class="breadcrumb-item"><a href="/">Accueil</a></li>
             <li class="breadcrumb-item"><a href="/products">Catalogue</a></li>
             <?php if ($product['categorie_nom']): ?>
                 <li class="breadcrumb-item"><a href="/products?category=<?= $product['categorie_id'] ?>"><?= e($product['categorie_nom']) ?></a></li>
@@ -48,7 +48,7 @@
             <div class="mb-3">
                 <?php if ($product['quantite_stock'] > 0): ?>
                     <span class="badge bg-success-subtle text-success fs-6">
-                        <i class="bi bi-check-circle me-1"></i>En stock (<?= $product['quantite_stock'] ?> disponible<?= $product['quantite_stock'] > 1 ? 's' : '' ?>)
+                        <i class="bi bi-check-circle me-1"></i>En stock
                     </span>
                 <?php else: ?>
                     <span class="badge bg-danger-subtle text-danger fs-6">
@@ -64,21 +64,7 @@
                 </div>
             <?php endif; ?>
 
-            <!-- Features -->
-            <div class="d-flex gap-3 mb-4 flex-wrap">
-                <div class="d-flex align-items-center gap-2" style="font-size:0.85rem; color:var(--text-secondary);">
-                    <span style="width:32px;height:32px;border-radius:8px;background:var(--sea-subtle);display:flex;align-items:center;justify-content:center;">🚚</span>
-                    Livraison Tunisie
-                </div>
-                <div class="d-flex align-items-center gap-2" style="font-size:0.85rem; color:var(--text-secondary);">
-                    <span style="width:32px;height:32px;border-radius:8px;background:var(--sand-subtle);display:flex;align-items:center;justify-content:center;">🛡️</span>
-                    Qualité garantie
-                </div>
-                <div class="d-flex align-items-center gap-2" style="font-size:0.85rem; color:var(--text-secondary);">
-                    <span style="width:32px;height:32px;border-radius:8px;background:var(--sea-subtle);display:flex;align-items:center;justify-content:center;">📞</span>
-                    Support 24/7
-                </div>
-            </div>
+
 
             <!-- Action Buttons -->
             <div class="d-flex gap-3 align-items-center flex-wrap">
@@ -115,7 +101,7 @@
     <!-- Reviews Section -->
     <div class="mt-5 reveal">
         <h3 class="section-title mb-4" style="color:var(--ocean);">
-            ⭐ Avis Clients
+            <i class="bi bi-star-fill me-1" style="color:#f59e0b;"></i>Avis Clients
             <?php if (!empty($reviews)): ?>
                 <span class="badge ms-2" style="background:var(--sea-subtle); color:var(--ocean); font-size:0.7rem;"><?= count($reviews) ?></span>
             <?php endif; ?>
@@ -130,7 +116,7 @@
                         <a href="/login" class="btn btn-primary btn-sm"><i class="bi bi-box-arrow-in-right me-1"></i>Connexion</a>
                     <?php elseif ($userReviewed): ?>
                         <div class="text-center">
-                            <div style="font-size:2rem;">✅</div>
+                            <div style="font-size:2rem;"><i class="bi bi-check-circle-fill" style="color:var(--ocean);"></i></div>
                             <p class="text-muted mb-0">Vous avez déjà donné votre avis sur ce produit.</p>
                         </div>
                     <?php else: ?>
@@ -162,7 +148,7 @@
             <div class="col-lg-8">
                 <?php if (empty($reviews)): ?>
                     <div class="card p-4 text-center">
-                        <div style="font-size:2.5rem; margin-bottom:0.5rem;">💬</div>
+                        <div style="font-size:2.5rem; margin-bottom:0.5rem;"><i class="bi bi-chat-dots" style="color:var(--ocean);"></i></div>
                         <p class="text-muted mb-0">Aucun avis pour le moment. Soyez le premier à donner votre avis !</p>
                     </div>
                 <?php else: ?>
@@ -214,7 +200,7 @@
     <!-- Related Products -->
     <?php if (!empty($related)): ?>
         <div class="mt-5 reveal">
-            <h3 class="section-title" style="color:var(--ocean);">🐟 Produits Similaires</h3>
+            <h3 class="section-title" style="color:var(--ocean);">Produits Similaires</h3>
             <div class="row g-3">
                 <?php foreach ($related as $rel): ?>
                     <div class="col-6 col-md-3">

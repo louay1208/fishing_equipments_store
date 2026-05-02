@@ -16,7 +16,7 @@ $adminName = $_SESSION['user_name'] ?? 'Admin';
     <div class="container">
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
             <div>
-                <h1 class="admin-greeting">Bonjour, <?= e($adminName) ?> 👋</h1>
+                <h1 class="admin-greeting">Bonjour, <?= e($adminName) ?></h1>
                 <p class="admin-date">
                     <?= strftime('%A %d %B %Y') ?: date('l d F Y') ?>
                     <?php if ($stats['pending'] > 0): ?>

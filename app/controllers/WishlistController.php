@@ -41,7 +41,7 @@ class WishlistController {
         } else {
             $stmt = $db->prepare("INSERT INTO favori (utilisateur_id, produit_id) VALUES (?, ?)");
             $stmt->execute([$_SESSION['user_id'], $productId]);
-            flash('success', 'Produit ajouté aux favoris ❤️');
+            flash('success', 'Produit ajouté aux favoris');
         }
 
         // Redirect back

@@ -1,7 +1,7 @@
 <div class="auth-container">
     <div class="auth-card card">
         <div class="text-center mb-3">
-            <span style="font-size: 2.5rem;">⚓</span>
+            <span style="font-size: 2.5rem; color:var(--ocean);"><i class="bi bi-person-circle"></i></span>
         </div>
         <h2 class="text-center" style="color:var(--ocean);">Connexion</h2>
         <p class="subtitle text-center">Connectez-vous à votre compte Pêche Marine TN</p>

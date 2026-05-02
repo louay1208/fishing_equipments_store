@@ -12,5 +12,14 @@ desktop.ini
 # PHP
 *.log
 
-# Docs
-docs/
+# SQLite database (auto-generated)
+database/*.db
+
+# Uploaded avatars (user-specific)
+public/assets/images/avatars/*
+!public/assets/images/avatars/.gitkeep
+
+# Test files
+public/phpinfo.php
+public/phptest.php
+public/test2.php

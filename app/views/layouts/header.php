@@ -38,14 +38,14 @@ if (isLoggedIn()) {
 <div class="toast-container">
     <?php if ($msg = flash('success')): ?>
         <div class="toast-notification toast-success">
-            <span class="toast-icon">✅</span>
+            <span class="toast-icon"><i class="bi bi-check-circle-fill"></i></span>
             <span><?= e($msg) ?></span>
             <button class="toast-close">&times;</button>
         </div>
     <?php endif; ?>
     <?php if ($msg = flash('error')): ?>
         <div class="toast-notification toast-error">
-            <span class="toast-icon">⚠️</span>
+            <span class="toast-icon"><i class="bi bi-exclamation-triangle-fill"></i></span>
             <span><?= e($msg) ?></span>
             <button class="toast-close">&times;</button>
         </div>
@@ -53,7 +53,7 @@ if (isLoggedIn()) {
 </div>
 
 <!-- Back to Top -->
-<button class="back-to-top" id="backToTop" title="Retour en haut">🌊</button>
+<button class="back-to-top" id="backToTop" title="Retour en haut"><i class="bi bi-arrow-up"></i></button>
 
 <!-- ═══ Premium Navbar ═══ -->
 <nav class="navbar navbar-expand-lg">

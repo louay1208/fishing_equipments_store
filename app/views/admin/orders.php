@@ -25,7 +25,7 @@ $statusFilter = $_GET['status'] ?? '';
 
     <?php if (empty($orders)): ?>
         <div class="empty-state">
-            <div class="icon">📦</div>
+            <div class="icon"><i class="bi bi-inbox" style="font-size:2.5rem;color:var(--ocean);"></i></div>
             <h5>Aucune commande</h5>
         </div>
     <?php else: ?>

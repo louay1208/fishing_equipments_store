@@ -3,7 +3,7 @@
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
             <div>
                 <h1 style="color:var(--ocean);"><i class="bi bi-heart me-2"></i>Mes Favoris</h1>
-                <p class="text-muted mb-0">❤️ <?= count($favorites) ?> produit<?= count($favorites) > 1 ? 's' : '' ?> sauvegardé<?= count($favorites) > 1 ? 's' : '' ?></p>
+                <p class="text-muted mb-0"><?= count($favorites) ?> produit<?= count($favorites) > 1 ? 's' : '' ?> sauvegardé<?= count($favorites) > 1 ? 's' : '' ?></p>
             </div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0" style="font-size:0.85rem;">
@@ -18,9 +18,9 @@
 <div class="container pb-5">
     <?php if (empty($favorites)): ?>
         <div class="text-center py-5">
-            <div style="font-size:4rem; margin-bottom:1rem;">💔</div>
+            <div style="font-size:4rem; margin-bottom:1rem;"><i class="bi bi-heart" style="color:var(--ocean);"></i></div>
             <h3 class="fw-bold mb-2" style="color:var(--ocean);">Aucun favori pour le moment</h3>
-            <p class="text-muted mb-4">Parcourez notre catalogue et cliquez sur ❤️ pour sauvegarder vos produits préférés.</p>
+            <p class="text-muted mb-4">Parcourez notre catalogue et cliquez sur le coeur pour sauvegarder vos produits préférés.</p>
             <a href="/products" class="btn btn-primary"><i class="bi bi-grid me-1"></i>Explorer le Catalogue</a>
         </div>
     <?php else: ?>

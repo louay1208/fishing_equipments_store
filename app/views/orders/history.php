@@ -7,8 +7,8 @@ $statusLabels = [
     'annulee' => 'Annulée',
 ];
 $statusIcons = [
-    'en_attente' => '⏳', 'confirmee' => '✅',
-    'expediee' => '🚚', 'livree' => '📦', 'annulee' => '❌',
+    'en_attente' => '•', 'confirmee' => '•',
+    'expediee' => '•', 'livree' => '•', 'annulee' => '•',
 ];
 ?>
 
@@ -22,7 +22,7 @@ $statusIcons = [
 <div class="container pb-5">
     <?php if (empty($orders)): ?>
         <div class="empty-state">
-            <div class="icon">🚢</div>
+            <div class="icon"><i class="bi bi-box-seam" style="font-size:2.5rem;color:var(--ocean);"></i></div>
             <h5 style="color:var(--ocean);">Aucune commande</h5>
             <p class="text-muted">Vous n'avez pas encore passé de commande — lancez-vous !</p>
             <a href="/products" class="btn btn-primary"><i class="bi bi-compass me-1"></i>Découvrir nos Produits</a>
@@ -35,7 +35,7 @@ $statusIcons = [
                         <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                             <div>
                                 <h6 class="fw-bold mb-1" style="color:var(--ocean);">
-                                    <?= $statusIcons[$order['statut']] ?? '📦' ?> Commande #<?= $order['id'] ?>
+                                    <?= $statusIcons[$order['statut']] ?? '•' ?> Commande #<?= $order['id'] ?>
                                 </h6>
                                 <span class="text-muted" style="font-size: 0.85rem;">
                                     <i class="bi bi-calendar me-1"></i><?= date('d/m/Y à H:i', strtotime($order['date_commande'])) ?>

@@ -1,7 +1,7 @@
 <div class="auth-container" style="max-width: 520px;">
     <div class="auth-card card">
         <div class="text-center mb-3">
-            <span style="font-size: 2.5rem;">🌊</span>
+            <span style="font-size: 2.5rem; color:var(--ocean);"><i class="bi bi-person-plus"></i></span>
         </div>
         <h2 class="text-center" style="color:var(--ocean);">Créer un Compte</h2>
         <p class="subtitle text-center">Rejoignez la communauté Pêche Marine TN</p>

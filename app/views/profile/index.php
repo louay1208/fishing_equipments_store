@@ -26,7 +26,7 @@ $initials = strtoupper(mb_substr($user['prenom'],0,1) . mb_substr($user['nom'],0
             <form method="POST" action="/profile" enctype="multipart/form-data">
                 <!-- Avatar Section -->
                 <div class="card p-4 mb-4 text-center" style="border-top: 3px solid var(--sea);">
-                    <h5 class="fw-bold mb-3" style="color:var(--ocean);">📸 Photo de Profil</h5>
+                    <h5 class="fw-bold mb-3" style="color:var(--ocean);">Photo de Profil</h5>
                     <div class="d-flex flex-column align-items-center gap-3">
                         <?php if (!empty($user['avatar'])): ?>
                             <img src="/assets/images/avatars/<?= e($user['avatar']) ?>" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid var(--sea);">
@@ -47,7 +47,7 @@ $initials = strtoupper(mb_substr($user['prenom'],0,1) . mb_substr($user['nom'],0
 
                 <!-- Personal Info -->
                 <div class="card p-4" style="border-top: 3px solid var(--sea);">
-                    <h5 class="fw-bold mb-3" style="color:var(--ocean);">🌊 Informations Personnelles</h5>
+                    <h5 class="fw-bold mb-3" style="color:var(--ocean);">Informations Personnelles</h5>
                     <div class="row g-3 mb-3">
                         <div class="col-md-6">
                             <label for="nom" class="form-label">Nom</label>
@@ -85,7 +85,7 @@ $initials = strtoupper(mb_substr($user['prenom'],0,1) . mb_substr($user['nom'],0
                     </div>
 
                     <hr>
-                    <h5 class="fw-bold mb-3" style="color:var(--ocean);">🔒 Changer le Mot de Passe</h5>
+                    <h5 class="fw-bold mb-3" style="color:var(--ocean);"><i class="bi bi-lock me-1"></i>Changer le Mot de Passe</h5>
                     <p class="text-muted" style="font-size: 0.85rem;">Laissez vide si vous ne souhaitez pas changer le mot de passe.</p>
                     <div class="mb-3">
                         <label for="current_password" class="form-label">Mot de passe actuel</label>
